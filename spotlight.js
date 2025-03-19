@@ -15,6 +15,7 @@ $.onReceive((messageType) => {
         switch (messageType) {
             case "BaseSignal":
                 animator.setTrigger("OnBase");
+                break;
             case "BaseBlinkOff":
                 animator.setTrigger("BaseBlinkOff");
                 break;
@@ -75,5 +76,4 @@ $.onReceive((messageType) => {
             default:
         }
     }
-
 });
