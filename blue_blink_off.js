@@ -7,6 +7,6 @@ const targets = [
 
 $.onInteract(() => {
     for (let i = 0; i < targets.length; i++) {
-        targets[i].send("BaseBlinkHigh", null);
+        targets[i].send("BlueBlinkOff", null);
     }
 });

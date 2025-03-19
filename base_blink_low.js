@@ -1,5 +1,12 @@
-const target = $.worldItemReference("SpotLights")
+const targets = [
+    $.worldItemReference("SpotLightFront"),
+    $.worldItemReference("SpotLightBack"),
+    $.worldItemReference("SpotLightRight"),
+    $.worldItemReference("SpotLightLeft")
+];
 
 $.onInteract(() => {
-    target.send("BaseBlinkLow", null);
+    for (let i = 0; i < targets.length; i++) {
+        targets[i].send("BaseBlinkLow", null);
+    }
 });
