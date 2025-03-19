@@ -1,5 +1,12 @@
-const target = $.worldItemReference("FloorLights_Center");
+const targets = [
+    $.worldItemReference("FloorLight_2"),
+    $.worldItemReference("FloorLight_3"),
+    $.worldItemReference("MiniFloorLight_3"),
+    $.worldItemReference("MiniFloorLight_4"),
+];
 
 $.onInteract(() => {
-    $.sendSignalCompat("this", "BaseSignal");
+    for (let i = 0; i < targets.length; i++) {
+        targets[i].send("BaseSignal", null);
+    }
 });
