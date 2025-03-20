@@ -12,9 +12,10 @@ const targets = [
     $.worldItemReference("SpotLightFront"),
     $.worldItemReference("SpotLightBack"),
     $.worldItemReference("SpotLightRight"),
-    $.worldItemReference("SpotLightLeft")
+    $.worldItemReference("SpotLightLeft"),
+    $.worldItemReference("SearchLights_R"),
+    $.worldItemReference("SearchLights_L")
 ];
-
 $.onInteract(() => {
     for (let i = 0; i < targets.length; i++) {
         targets[i].send("RedBlinkMid", null);

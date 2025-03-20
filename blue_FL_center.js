@@ -3,6 +3,12 @@ const targets = [
     $.worldItemReference("FloorLight_3"),
     $.worldItemReference("MiniFloorLight_3"),
     $.worldItemReference("MiniFloorLight_4"),
+    $.worldItemReference("SpotLightFront"),
+    $.worldItemReference("SpotLightBack"),
+    $.worldItemReference("SpotLightRight"),
+    $.worldItemReference("SpotLightLeft"),
+    $.worldItemReference("SearchLights_R"),
+    $.worldItemReference("SearchLights_L")
 ];
 
 $.onInteract(() => {
