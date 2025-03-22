@@ -1,2 +1,2 @@
-# ClusterFirstLiveStage
- ClusterのFirstLiveStageワールド用のClsuter Script
+# FirstLiveStage-Cluster-
+ ClusterのFirst Live Stageワールド用のClsuter Script
