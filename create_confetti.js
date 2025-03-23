@@ -1,21 +1,41 @@
-const spawnPoint = $.subNode("CreateVFXPoint")
-const confettiGoldID = new WorldItemTemplateId("ConfettiGold");
-const confettiSilverID = new WorldItemTemplateId("ConfettiSilver");
+// const confettiGold = $.subNode("ConfettiGold");
+// const confettiSilver = $.subNode("ConfettiSilver");
+// const timer = 7;
+const goldConfetti = new WorldItemTemplateId("GoldConfetti");
+const silverConfetti = new WorldItemTemplateId("SilverConfetti");
+const point = $.subNode("CreateVFXPoint");
 
 $.onReceive((messageType) => {
-    // 金色の紙吹雪を作成
-    if (messageType === "CreateConfettiGold") {
-        const spawnPosition = spawnPoint.getGlobalPosition();
-        const spawnRotation = spawnPoint.getGlobalRotation();
-        $.createItem(confettiGoldID, spawnPosition, spawnRotation);
-        $.log("コンフェッティゴールドメッセージ受信しました");
-    }
+    // 紙吹雪のパーティクルを有効化
+    // if (messageType === "ActiveConfetti") {
+    //     // 紙吹雪を有効化
+    //     confettiGold.setEnabled(true);
+    //     confettiSilver.setEnabled(true);
+    //     $.state.flag = true;
+    // }
 
-    // 銀色の紙吹雪を作成
-    if (messageType === "CreateConfettiSilver") {
-        const spawnPosition = spawnPoint.getGlobalPosition();
-        const spawnRotation = spawnPoint.getGlobalRotation();
-        $.createItem(confettiSilverID, spawnPosition, spawnRotation);
-        $.log("コンフェティシルバーのメッセージ受信しました");
+    if (messageType === "ActiveConfetti") {
+        const pointPosition = point.getGlobalPosition();
+        const pointRotation = point.getGlobalRotation();
+        $.createItem(goldConfetti, pointPosition, pointRotation);
+        $.createItem(silverConfetti, pointPosition, pointRotation);
     }
 });
+
+// $.onUpdate((deltaTime) => {
+//     if ($.state.flag) {
+//         if ($.state.timer == null) {
+//             $.state.timer = timer;
+//         }
+
+//         $.state.time -= deltaTime;
+
+//         // タイマーが0以下になったら非表示にする
+//         if ($.state.time <= 0) {
+//             confettiGold.setEnabled(false);
+//             confettiSilver.setEnabled(false);
+//             $.state.time = timer;
+//             $.state.flag = false;
+//         }
+//     }
+// });

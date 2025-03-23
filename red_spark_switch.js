@@ -8,16 +8,38 @@ const targets = [
     $.worldItemReference("FireSpark_7"),
 ];
 
+const redSparkSwitch = $.subNode("RS_SwitchModel");
+const r_sparkTimer = 7;
+
 $.onInteract(() => {
     for (let i = 0; i < targets.length; i++) {
-        if (!targets[i] || !targets[i].exists()) {
-            $.log("エラー: target" + [i] + "が見つかりません");
-            return;
-        }
-        targets[i].send("CreateRedSpark", null);
+        // 対象にメッセージを送信
+        targets[i].send("ActiveRedSpark", null);
     }
 
-    $.log("レッドスパークのシグナルを送信しました");
-
+    // SEを鳴らすシグナルを送信
     $.sendSignalCompat("this", "Spark");
+
+    redSparkSwitch.setEnabled(false);
+    $.state.rs_flag = true;
+});
+
+$.onUpdate((deltaTime) => {
+    if (!$.state.initialized) {
+        $.state.initialized = true;
+    }
+
+    if ($.state.rs_flag) {
+        if ($.state.r_sparkTimer == null) {
+            $.state.r_sparkTimer = r_sparkTimer;
+        }
+
+        $.state.r_sparkTimer -= deltaTime;
+
+        if ($.state.r_sparkTimer <= 0) {
+            redSparkSwitch.setEnabled(true);
+            $.state.r_sparkTimer = r_sparkTimer;
+            $.state.rs_flag = false;
+        }
+    }
 });
