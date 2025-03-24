@@ -14,9 +14,9 @@ $.onReceive((messageType) => {
     //     $.state.flag = true;
     // }
 
+    const pointPosition = point.getGlobalPosition();
+    const pointRotation = point.getGlobalRotation();
     if (messageType === "ActiveConfetti") {
-        const pointPosition = point.getGlobalPosition();
-        const pointRotation = point.getGlobalRotation();
         $.createItem(goldConfetti, pointPosition, pointRotation);
         $.createItem(silverConfetti, pointPosition, pointRotation);
     }
