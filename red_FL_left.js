@@ -1,3 +1,0 @@
-$.onInteract(() => {
-    $.sendSignalCompat("this", "OnRed");
-});
