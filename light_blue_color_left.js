@@ -1,5 +1,3 @@
-const target = $.worldItemReference("LightManager");
-
 $.onInteract(() => {
-    target.send("OnLeftBlue", null);
+    $.sendSignalCompat("this", "OnBlue");
 });

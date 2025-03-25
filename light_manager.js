@@ -23,106 +23,95 @@ const leftLights = [
     $.worldItemReference("MiniFloorLight_5"),
     $.worldItemReference("MiniFloorLight_6")
 ];
+const targets = [
+    $.worldItemReference("FloorLight_1"),
+    $.worldItemReference("FloorLight_2"),
+    $.worldItemReference("FloorLight_3"),
+    $.worldItemReference("FloorLight_4"),
+    $.worldItemReference("MiniFloorLight_1"),
+    $.worldItemReference("MiniFloorLight_2"),
+    $.worldItemReference("MiniFloorLight_3"),
+    $.worldItemReference("MiniFloorLight_4"),
+    $.worldItemReference("MiniFloorLight_5"),
+    $.worldItemReference("MiniFloorLight_6"),
+    $.worldItemReference("SpotLightSetFront"),
+    $.worldItemReference("SpotLightSetBack"),
+    $.worldItemReference("SpotLightSetRight"),
+    $.worldItemReference("SpotLightSetLeft"),
+    $.worldItemReference("SearchLights_R"),
+    $.worldItemReference("SearchLights_L")
+];
 
-function blinkRightBaseColor() {
+// 右側を基本色にする関数
+function rightBaseColor() {
     rightLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
-    $.state.blink = false;
 }
 
-function resetRightBaseColor() {
-    rightLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
-    $.state.reset = false;
-}
-
-function blinkCenterBaseColor() {
-    centerLights.forEach(() => $.sendSignalCompat("this", "BaseBlinkOff"));
-    $.state.blink = false;
-}
-
-function resetCenterBaseColor() {
+// 中央を基本色にする関数
+function centerBaseColor() {
     centerLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
-    $.state.reset = false;
 }
 
-function blinkLeftBaseColor() {
-    leftLights.forEach(() => $.sendSignalCompat("this", "BaseBlinkOff"));
-    $.state.blink = false;
-}
-
-function resetLeftBaseColor() {
+// 左側を基本色にする関数
+function leftBaseColor() {
     leftLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
-    $.state.reset = false;
 }
 
 $.onReceive((messageType) => {
-    const blink = $.state.blink;
-    const reset = $.state.reset;
-
-    // 各位置のスイッチ
+    // 各位置のスイッチが押された時のパターン
     switch (messageType) {
         case "OnRightBase":
-            if (blink) {
-                blinkCenterBaseColor();
-                blinkLeftBaseColor
-            }
-
-            if (reset) {
-                resetCenterBaseColor
-                resetLeftBaseColor
-            }
-            rightLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
+            centerBaseColor();
+            leftBaseColor();
             break;
         case "OnRightRed":
-            if (blink) {
-                blinkCenterBaseColor();
-                blinkLeftBaseColor();
-            }
-            if (reset) {
-                resetCenterBaseColor()
-                resetLeftBaseColor();
-            }
-            centerAndLeftBaseColor();
-            rightLights.forEach(() => $.sendSignalCompat("this", "OnRed"));
+            // rightBaseColor();
+            centerBaseColor();
+            leftBaseColor();
+            // if ($.state.blink) {
+            //     targets.forEach(() => $.sendSignalCompat("this", "BaseBlinkOff"));
+            //     $.state.blink = false;
+            // }
             break;
         case "OnRightGreen":
-            centerAndLeftBaseColor();
-            rightLights.forEach(() => $.sendSignalCompat("this", "OnGreen"));
+            centerBaseColor();
+            leftBaseColor();
             break;
         case "OnRightBlue":
-            centerAndLeftBaseColor();
-            rightLights.forEach(() => R.sendSignalCompat("this", "OnBlue"));
+            centerBaseColor();
+            leftBaseColor();
             break;
         case "OnCenterBase":
-            rightAndLeftBaseColor();
-            centerLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
+            rightBaseColor();
+            leftBaseColor();
             break;
         case "OnCenterRed":
-            rightAndLeftBaseColor();
-            centerLights.forEach(() => $.sendSignalCompat("this", "OnRed"));
+            rightBaseColor();
+            leftBaseColor();
             break;
         case "OnCenterGreen":
-            rightAndLeftBaseColor();
-            centerLights.forEach(() => $.sendSignalCompat("this", "OnGreen"));
+            rightBaseColor();
+            leftBaseColor();
             break;
         case "OnCenterBlue":
-            rightAndLeftBaseColor();
-            centerLights.forEach(() => $.sendSignalCompat("this", "OnBlue"));
+            rightBaseColor();
+            leftBaseColor();
             break;
         case "OnLeftBase":
-            rightAndCenterBaseColor();
-            leftLights.forEach(() => $.sendSignalCompat("this", "OnBase"));
+            rightBaseColor();
+            centerBaseColor();
             break;
         case "OnLeftRed":
-            rightAndCenterBaseColor();
-            leftLights.forEach(() => $.sendSignalCompat("this", "OnRed"));
+            rightBaseColor();
+            centerBaseColor();
             break;
         case "OnLeftGreen":
-            rightAndCenterBaseColor();
-            leftLights.forEach(() => $.sendSignalCompat("this", "OnGreen"));
+            rightBaseColor();
+            centerBaseColor();
             break;
         case "OnLeftBlue":
-            rightAndCenterBaseColor();
-            leftLights.forEach(() => $.sendSignalCompat("this", "OnBlue"));
+            rightBaseColor();
+            centerBaseColor();
             break;
         default:
             break;
