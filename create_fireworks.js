@@ -80,6 +80,10 @@ $.onReceive((messageType) => {
             }
             climax.setEnabled(true);
             break;
+        case "FireworkStop":
+            for (let i = 0; i < targets.length; i++) {
+                targets[i].setEnabled(false);
+            }
         default:
             break;
     }
